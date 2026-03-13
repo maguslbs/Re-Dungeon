@@ -3786,6 +3786,8 @@ GameObject:
   - component: {fileID: 244539027}
   - component: {fileID: 244539026}
   - component: {fileID: 244539028}
+  - component: {fileID: 244539029}
+  - component: {fileID: 244539030}
   m_Layer: 8
   m_Name: Enemy_Skeleton
   m_TagString: Untagged
@@ -3920,11 +3922,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e795a3a92d064e4185a5b55c48f4a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10
   targetCheck: {fileID: 1284730510}
   targetCheckRadius: 1
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &244539029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244539023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bad85c6802b9fa40956204f94810632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  isDead: 0
+--- !u!114 &244539030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244539023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aec6c3440d375243b65882ed015bc2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDamageMaterial: {fileID: 2100000, guid: da9ca2c2fc0f7e84cb870cb861dfc2c4, type: 2}
+  onDamageVfxDuration: 0.15
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -25537,9 +25568,11 @@ GameObject:
   - component: {fileID: 1004782910}
   - component: {fileID: 1004782908}
   - component: {fileID: 1004782909}
+  - component: {fileID: 1004782911}
+  - component: {fileID: 1004782912}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25673,11 +25706,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e795a3a92d064e4185a5b55c48f4a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10
   targetCheck: {fileID: 2100950305}
   targetCheckRadius: 1
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &1004782911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004782905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ee66bdaf6a8809429e2f238c45a4ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  isDead: 0
+--- !u!114 &1004782912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004782905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aec6c3440d375243b65882ed015bc2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDamageMaterial: {fileID: 2100000, guid: da9ca2c2fc0f7e84cb870cb861dfc2c4, type: 2}
+  onDamageVfxDuration: 0.15
 --- !u!1 &1093238196
 GameObject:
   m_ObjectHideFlags: 0
