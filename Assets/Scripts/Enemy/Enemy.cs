@@ -6,6 +6,7 @@ public class Enemy : Entity
     public Enemy_MoveState moveState;
     public Enemy_AttackState attackState;
     public Enemy_BattleState battleState;
+    public Enemy_DeadState deadState;
 
     [Header("Battle Details")]
     public float battleMoveSpeed = 3;
@@ -13,19 +14,31 @@ public class Enemy : Entity
     public float battleTimeDuration = 5;
     public float minimumRetreatDistance = 1;
     public Vector2 retretVelocity;
-  
+
     [Header("Movement Details")]
     public float idleTime = 2;
     public float moveSpeed = 1.4f;
 
-    [Range(0,2)]
+    [Range(0, 2)]
     public float moveAnimSpeedMultiplier = 1;
 
     [Header("Player Detection")]
     [SerializeField] private LayerMask whatIsPlayer;
     [SerializeField] private Transform playerCheck;
     [SerializeField] private float playerCheckDistance = 10;
-    public Transform player{ get; private set; }
+    public Transform player { get; private set; }
+
+    public override void EntityDeath()
+    {
+        base.EntityDeath();
+
+        stateMachine.ChangeState(deadState);
+    }
+
+    private void HandlePlayerDeath()
+    {
+        stateMachine.ChangeState(idleState);
+    }
 
     public void TryEnterBattleState(Transform player)
     {
@@ -70,5 +83,15 @@ public class Enemy : Entity
 
         Gizmos.color = Color.green;
         Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + (facingDir * minimumRetreatDistance), playerCheck.position.y));
+    }
+
+    private void OnEnable()
+    {
+        Player.OnPlayerDeath += HandlePlayerDeath;
+    }
+
+    private void OnDisable()
+    {
+        Player.OnPlayerDeath -= HandlePlayerDeath;
     }
 }
