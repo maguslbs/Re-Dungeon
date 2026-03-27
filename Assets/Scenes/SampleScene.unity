@@ -3966,6 +3966,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onDamageMaterial: {fileID: 2100000, guid: da9ca2c2fc0f7e84cb870cb861dfc2c4, type: 2}
   onDamageVfxDuration: 0.2
+  hitVfxColor: {r: 0.7207546, g: 0.6387841, b: 0.014959042, a: 1}
+  hitVfx: {fileID: 296084292031064830, guid: 69e4d5e3bb8e9f1469c5621f8743da51, type: 3}
   attackAlert: {fileID: 819773898}
 --- !u!1 &461436339
 GameObject:
@@ -4103,6 +4105,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onDamageMaterial: {fileID: 2100000, guid: da9ca2c2fc0f7e84cb870cb861dfc2c4, type: 2}
   onDamageVfxDuration: 0.2
+  hitVfxColor: {r: 1, g: 1, b: 1, a: 1}
+  hitVfx: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -25901,6 +25905,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onDamageMaterial: {fileID: 2100000, guid: da9ca2c2fc0f7e84cb870cb861dfc2c4, type: 2}
   onDamageVfxDuration: 0.2
+  hitVfxColor: {r: 1, g: 1, b: 1, a: 1}
+  hitVfx: {fileID: 0}
 --- !u!1 &835608794
 GameObject:
   m_ObjectHideFlags: 0
@@ -26318,6 +26324,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onDamageMaterial: {fileID: 2100000, guid: da9ca2c2fc0f7e84cb870cb861dfc2c4, type: 2}
   onDamageVfxDuration: 0.15
+  hitVfxColor: {r: 0.6528301, g: 0.06774645, b: 0.06774645, a: 1}
+  hitVfx: {fileID: 296084292031064830, guid: 69e4d5e3bb8e9f1469c5621f8743da51, type: 3}
 --- !u!114 &1004782913
 MonoBehaviour:
   m_ObjectHideFlags: 0
