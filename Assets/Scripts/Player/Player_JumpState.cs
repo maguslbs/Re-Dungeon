@@ -8,7 +8,15 @@ public class Player_JumpState : Player_AiredState
 
     public override void Enter()
     {
+        if (!player.stamina.HasStamina())
+        {
+            stateMachine.ChangeState(player.idleState);
+            return;
+        }
+
         base.Enter();
+
+        player.stamina.UseStamina(player.jumpCost);
 
         player.SetVelocity(rb.linearVelocity.x, player.jumpForce);
     }

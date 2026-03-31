@@ -12,7 +12,15 @@ public class Player_ParryState : PlayerState
 
     public override void Enter()
     {
+        if (!player.stamina.HasStamina())
+        {
+            stateMachine.ChangeState(player.idleState);
+            return;
+        }
+
         base.Enter();
+
+        player.stamina.UseStamina(player.parryCost);
 
         stateTimer = combat.GetParryRecoveryDuration();
         parriedSomebody = combat.ParryPerformed();

@@ -19,6 +19,8 @@ public class Player : Entity
     public Player_DeadState deadState { get; private set; }
     public Player_ParryState parryState { get; private set; }
 
+    public Entity_Stamina stamina { get; private set; }
+
     [Header("Attack Details")]
     public Vector2[] attackVelocity;
     public Vector2 jumpAttackVelocity;
@@ -31,6 +33,13 @@ public class Player : Entity
     public float moveSpeed;
     public float jumpForce = 5f;
     public Vector2 wallJumpForce;
+
+    [Header("Stamina Cost")]
+    public float attackCost = 20f;
+    public float dashCost = 30f;
+    public float jumpCost = 5f;
+    public float airAttackCost = 25f;
+    public float parryCost = 10f;
 
     [Range(0, 1)]
     public float inAirMoveMultiplier = .7f; // The range only from 0 to 1
@@ -58,6 +67,8 @@ public class Player : Entity
         jumpAttackState = new Player_JumpAttackState(this, stateMachine, "jumpAttack");
         deadState = new Player_DeadState(this, stateMachine, "dead");
         parryState = new Player_ParryState(this, stateMachine, "parry");
+
+        stamina = GetComponent<Entity_Stamina>();
     }
 
     protected override void Start()
