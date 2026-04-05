@@ -7,6 +7,7 @@ public class Entity_Stamina : MonoBehaviour
 
     [SerializeField] private float maxStamina = 100;
     [SerializeField] private float currentStamina;
+    [SerializeField] private float blockRegenMultiplier = 0.3f;
 
     [Header("Regen Settings")]
     [SerializeField] private float regenRate = 15f;
@@ -32,13 +33,21 @@ public class Entity_Stamina : MonoBehaviour
 
         regenTimer += Time.deltaTime;
 
-        if (regenTimer >= regenDelay)
-        {
-            currentStamina += regenRate * Time.deltaTime;
-            currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
+        if (regenTimer < regenDelay)
+            return;
 
-            OnStaminaChanged?.Invoke(currentStamina, maxStamina);
+        float regen = regenRate;
+
+        Player player = GetComponent<Player>();
+        if (player != null && player.stateMachine.currentState == player.blockState)
+        {
+            regen *= blockRegenMultiplier;
         }
+
+        currentStamina += regen * Time.deltaTime;
+        currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
+
+        OnStaminaChanged?.Invoke(currentStamina, maxStamina);
     }
 
     public bool CanUseStamina(float cost)

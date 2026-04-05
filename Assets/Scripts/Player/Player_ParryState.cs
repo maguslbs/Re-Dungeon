@@ -38,7 +38,7 @@ public class Player_ParryState : PlayerState
         if(triggerCalled)
             stateMachine.ChangeState(player.idleState);
 
-        if (stateTimer < 0 && parriedSomebody ==false)
+        if (stateTimer < 0 && parriedSomebody == false)
             stateMachine.ChangeState(player.idleState);
     }
 }

@@ -4464,7 +4464,7 @@ GameObject:
   - component: {fileID: 244539027}
   - component: {fileID: 244539026}
   - component: {fileID: 244539028}
-  - component: {fileID: 244539031}
+  - component: {fileID: 244539033}
   - component: {fileID: 244539032}
   m_Layer: 8
   m_Name: Enemy_Skeleton
@@ -4612,27 +4612,6 @@ MonoBehaviour:
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 128
---- !u!114 &244539031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 244539023}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ee66bdaf6a8809429e2f238c45a4ddd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
-  currentHealth: 0
-  maxHP: 200
-  isDead: 0
-  knockbackPower: {x: 1.5, y: 2.5}
-  heavyKnockBackPower: {x: 7, y: 7}
-  knockbackDuration: 0.2
-  heavyKnockbackDuration: 0.5
-  heavyDamageTreshold: 0.3
 --- !u!114 &244539032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4650,6 +4629,27 @@ MonoBehaviour:
   hitVfxColor: {r: 0.7207546, g: 0.6387841, b: 0.014959042, a: 1}
   hitVfx: {fileID: 296084292031064830, guid: 69e4d5e3bb8e9f1469c5621f8743da51, type: 3}
   attackAlert: {fileID: 0}
+--- !u!114 &244539033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244539023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bad85c6802b9fa40956204f94810632, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 1871507010}
+  currentHealth: 0
+  maxHP: 200
+  isDead: 0
+  knockbackPower: {x: 1.5, y: 2.5}
+  heavyKnockBackPower: {x: 7, y: 7}
+  knockbackDuration: 0.2
+  heavyKnockbackDuration: 0.5
+  heavyDamageTreshold: 0.3
 --- !u!1 &345837627
 GameObject:
   m_ObjectHideFlags: 0
@@ -27591,7 +27591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee66bdaf6a8809429e2f238c45a4ddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 803511569}
   currentHealth: 0
   maxHP: 200
   isDead: 0
@@ -27628,7 +27628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b262684fffc964468417fd791945ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 20
   targetCheck: {fileID: 2100950305}
   targetCheckRadius: 1
   whatIsTarget:
@@ -27649,7 +27649,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxStamina: 100
   currentStamina: 200
-  regenRate: 15
+  blockRegenMultiplier: 0.1
+  regenRate: 100
   regenDelay: 1
 --- !u!1 &1093238196
 GameObject:

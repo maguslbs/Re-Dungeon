@@ -18,6 +18,8 @@ public class Player : Entity
     public Player_JumpAttackState jumpAttackState { get; private set; }
     public Player_DeadState deadState { get; private set; }
     public Player_ParryState parryState { get; private set; }
+    public Player_BlockState blockState { get; private set; }
+    
 
     public Entity_Stamina stamina { get; private set; }
 
@@ -49,6 +51,7 @@ public class Player : Entity
     public float dashDuration = .25f;
     public float dashSpeed = 20;
     public Vector2 moveInput { get; private set; }
+    public bool blockHeld { get; private set; }
 
     protected override void Awake()
     {
@@ -67,6 +70,7 @@ public class Player : Entity
         jumpAttackState = new Player_JumpAttackState(this, stateMachine, "jumpAttack");
         deadState = new Player_DeadState(this, stateMachine, "dead");
         parryState = new Player_ParryState(this, stateMachine, "parry");
+        blockState = new Player_BlockState(this, stateMachine, "block");
 
         stamina = GetComponent<Entity_Stamina>();
     }
@@ -107,6 +111,17 @@ public class Player : Entity
         //input.Player.Movement.started;
         input.Player.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         input.Player.Movement.canceled += ctx => moveInput = Vector2.zero;
+
+        input.Player.Block.performed += ctx =>
+        {
+            blockHeld = true;
+            stateMachine.ChangeState(blockState);
+        };
+
+        input.Player.Block.canceled += ctx =>
+        {
+            blockHeld = false;
+        };
     }
 
     private void OnDisable()

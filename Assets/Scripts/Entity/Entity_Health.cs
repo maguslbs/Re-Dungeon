@@ -37,8 +37,17 @@ public class Entity_Health : MonoBehaviour, IDamageable
 
     public virtual void TakeDamage(float damage, Transform damageDealer)
     {
+
         if (isDead)
             return;
+
+        Player player = GetComponent<Player>();
+
+        if (player != null && player.stateMachine.currentState == player.blockState)
+        {
+            HandleBlock(player, damage);
+            return;
+        }
 
         Vector2 knockback = CalculateKnockback(damage, damageDealer);
         float duration = CalculateDuration(damage);
@@ -46,6 +55,16 @@ public class Entity_Health : MonoBehaviour, IDamageable
         entity?.ReceiveKnockback(knockback, duration);
         entityVfx?.PlayOnDamageVfx();
         ReduceHP(damage);
+    }
+
+    private void HandleBlock(Player player, float damage)
+    {
+        float staminaDamage = damage * 0.6f;
+        float hpDamage = damage * 0.4f;
+
+        player.stamina.UseStamina(staminaDamage);
+
+        ReduceHP(hpDamage);
     }
 
     protected void ReduceHP(float damage)
