@@ -16,7 +16,7 @@ public class Entity_Combat : MonoBehaviour
         vfx = GetComponent<Entity_VFX>();
     }
 
-    public void PerformAttack()
+    public void PerformMeleeAttack()
     {
 
         foreach (var target in GetDetectedColliders())
@@ -29,6 +29,15 @@ public class Entity_Combat : MonoBehaviour
             damageable.TakeDamage(damage, transform);
             vfx.CreateOnHitVFX(target.transform);
         }
+    }
+
+    public void PerformRangeAttack(IDamageable target)
+    {
+        if (target == null)
+            return;
+
+        target.TakeDamage(damage, transform);
+        vfx?.CreateOnHitVFX(((MonoBehaviour)target).transform);
     }
 
     protected Collider2D[] GetDetectedColliders()

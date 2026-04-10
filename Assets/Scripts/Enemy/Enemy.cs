@@ -12,6 +12,9 @@ public class Enemy : Entity
     [Header("Battle Details")]
     public float battleMoveSpeed = 3;
     public float attackDistance = 2;
+    public float attackCooldown = .5f;
+    public bool canChasePlayer = true;
+    [Space]
     public float battleTimeDuration = 5;
     public float minimumRetreatDistance = 1;
     public Vector2 retretVelocity;
@@ -32,9 +35,11 @@ public class Enemy : Entity
     [SerializeField] private LayerMask whatIsPlayer;
     [SerializeField] private Transform playerCheck;
     [SerializeField] private float playerCheckDistance = 10;
+    public float activeSlowMultiplier { get; private set; } = 1;
     public Transform player { get; private set; }
 
     public void EnableCounterWindow(bool enable) => canBeStunned = enable;
+    public float GetBattleMoveSpeed() => battleMoveSpeed * activeSlowMultiplier;
 
     public override void EntityDeath()
     {

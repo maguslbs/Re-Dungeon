@@ -115,7 +115,6 @@ public class Player : Entity
         input.Player.Block.performed += ctx =>
         {
             blockHeld = true;
-            stateMachine.ChangeState(blockState);
         };
 
         input.Player.Block.canceled += ctx =>

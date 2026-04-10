@@ -5,6 +5,10 @@ public class Player_ParryState : PlayerState
     private Player_Combat combat;
     private bool parriedSomebody;
 
+    [SerializeField] private Transform parryCheck;
+    [SerializeField] private float parryRadius = 1f;
+    [SerializeField] private LayerMask whatIsParryable;
+
     public Player_ParryState(Player player, StateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
         combat = player.GetComponent<Player_Combat>();
@@ -40,5 +44,10 @@ public class Player_ParryState : PlayerState
 
         if (stateTimer < 0 && parriedSomebody == false)
             stateMachine.ChangeState(player.idleState);
+    }
+
+    private Collider2D[] GetParryables()
+    {
+        return Physics2D.OverlapCircleAll(parryCheck.position, parryRadius, whatIsParryable);
     }
 }

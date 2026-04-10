@@ -8,7 +8,7 @@ public class Player_BlockState : PlayerState
 
     public override void Enter()
     {
-        if (!player.stamina.HasStamina())
+        if (!player.stamina.HasStamina() || !player.groundDetected)
         {
             stateMachine.ChangeState(player.idleState);
             return;
@@ -24,14 +24,15 @@ public class Player_BlockState : PlayerState
 
         rb.linearVelocity = Vector2.zero;
 
-        if (!player.blockHeld)
+        if (!player.blockHeld || !player.stamina.HasStamina())
         {
             stateMachine.ChangeState(player.idleState);
         }
 
-        if (!player.blockHeld || !player.stamina.HasStamina())
+        if (!player.groundDetected)
         {
-            stateMachine.ChangeState(player.idleState);
+            stateMachine.ChangeState(player.fallState);
+            return;
         }
 
     }

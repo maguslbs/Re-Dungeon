@@ -21,5 +21,8 @@ public class Player_GroundedState : PlayerState
 
         if (input.Player.Parry.WasPressedThisFrame())
             stateMachine.ChangeState(player.parryState);
+
+        if (player.blockHeld)
+            stateMachine.ChangeState(player.blockState);
     }
 }

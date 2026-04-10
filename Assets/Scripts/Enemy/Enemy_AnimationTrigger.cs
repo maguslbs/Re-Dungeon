@@ -23,4 +23,12 @@ public class Enemy_AnimationTrigger : Entity_AnimationTriggers
         enemyVfx.EnableAttackAlert(false);
         enemy.EnableCounterWindow(false);
     }
+
+    private void ShootArrow()
+    {
+        if (enemy is Enemy_ArcherElf archer)
+        {
+            archer.ShootArrow();
+        }
+    }
 }
