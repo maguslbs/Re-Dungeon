@@ -23,17 +23,25 @@ public class Enemy_ArcherElfArrow : MonoBehaviour, IParryable
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (((1 << collision.gameObject.layer) & whatIsTarget) != 0)
+        if (((1 << collision.gameObject.layer) & whatIsTarget) == 0)
+            return;
+
+        IDamageable damageable = collision.GetComponent<IDamageable>();
+        if (damageable == null)
+            return;
+
+        Entity entity = collision.GetComponent<Entity>();
+
+        // 🔥 Kalau invulnerable → tembus TANPA destroy
+        if (entity != null && entity.isInvulnerable)
         {
-            IDamageable damageable = collision.GetComponent<IDamageable>();
-
-            if (damageable != null)
-            {
-                combat.PerformRangeAttack(damageable);
-            }
-
-            Destroy(gameObject);
+            Physics2D.IgnoreCollision(col, collision, true);
+            return;
         }
+
+        // ✔ valid hit
+        combat.PerformRangeAttack(damageable);
+        Destroy(gameObject);
     }
 
     public void HandleParry()

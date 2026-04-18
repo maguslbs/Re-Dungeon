@@ -17,6 +17,12 @@ public class Enemy_ArcherElfBattleState : Enemy_BattleState
 
     public override void Update()
     {
+        if (enemy.IsMiniStunned)
+        {
+            enemy.SetVelocity(0, rb.linearVelocity.y);
+            return;
+        }
+
         stateTimer -= Time.deltaTime;
         UpdateAnimationParameters();
 

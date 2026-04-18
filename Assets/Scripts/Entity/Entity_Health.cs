@@ -18,12 +18,12 @@ public class Entity_Health : MonoBehaviour, IDamageable
 
     [Header("On Damage Knockback")]
     [SerializeField] private Vector2 knockbackPower = new Vector2(1.5f, 2.5f);
-    [SerializeField] private Vector2 heavyKnockBackPower = new Vector2(7,7);
+    [SerializeField] private Vector2 heavyKnockBackPower = new Vector2(7, 7);
     [SerializeField] private float knockbackDuration = .2f;
     [SerializeField] private float heavyKnockbackDuration = .5f;
 
     [Header("On Heavy Damage")]
-    [SerializeField] private float heavyDamageTreshold = .3f; //percentage damage taken to be considered as heavy damage
+    [SerializeField] private float heavyDamageTreshold = .3f;
 
     protected virtual void Awake()
     {
@@ -37,12 +37,13 @@ public class Entity_Health : MonoBehaviour, IDamageable
 
     public virtual void TakeDamage(float damage, Transform damageDealer)
     {
+        if (entity != null && entity.isInvulnerable)
+            return;
 
         if (isDead)
             return;
 
         Player player = GetComponent<Player>();
-
         if (player != null && player.stateMachine.currentState == player.blockState)
         {
             HandleBlock(player, damage);
@@ -52,7 +53,16 @@ public class Entity_Health : MonoBehaviour, IDamageable
         Vector2 knockback = CalculateKnockback(damage, damageDealer);
         float duration = CalculateDuration(damage);
 
-        entity?.ReceiveKnockback(knockback, duration);
+        Enemy enemy = GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.OnHit(damage, knockback, duration);
+        }
+        else
+        {
+            entity?.ReceiveKnockback(knockback, duration);
+        }
+
         entityVfx?.PlayOnDamageVfx();
         ReduceHP(damage);
     }
@@ -63,17 +73,14 @@ public class Entity_Health : MonoBehaviour, IDamageable
         float hpDamage = damage * 0.4f;
 
         player.stamina.UseStamina(staminaDamage);
-
         ReduceHP(hpDamage);
     }
 
     protected void ReduceHP(float damage)
     {
         currentHealth -= damage;
-
         OnHealthChanged?.Invoke(currentHealth, maxHP);
-
-        UpdateHealthBar(); 
+        UpdateHealthBar();
 
         if (currentHealth <= 0)
             Die();
@@ -83,29 +90,25 @@ public class Entity_Health : MonoBehaviour, IDamageable
     {
         isDead = true;
         entity.EntityDeath();
-        
     }
 
     private void UpdateHealthBar()
     {
         if (healthBar == null)
             return;
-        
+
         healthBar.value = currentHealth / maxHP;
     }
 
-    private Vector2 CalculateKnockback(float damage, Transform damageDealer)
+    protected Vector2 CalculateKnockback(float damage, Transform damageDealer)
     {
         int direction = transform.position.x > damageDealer.position.x ? 1 : -1;
-
         Vector2 knockback = isHeavyDamage(damage) ? heavyKnockBackPower : knockbackPower;
-
         knockback.x = knockback.x * direction;
-
         return knockback;
     }
 
-    private float CalculateDuration(float damage) => isHeavyDamage(damage) ? heavyKnockbackDuration : knockbackDuration;
+    protected float CalculateDuration(float damage) => isHeavyDamage(damage) ? heavyKnockbackDuration : knockbackDuration;
 
     private bool isHeavyDamage(float damage) => damage / maxHP > heavyDamageTreshold;
 }

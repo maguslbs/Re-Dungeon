@@ -140,12 +140,16 @@ MonoBehaviour:
   groundCheck: {fileID: 8248084380425832761}
   battleMoveSpeed: 3
   attackDistance: 2
+  attackCooldown: 0.5
+  canChasePlayer: 1
   battleTimeDuration: 5
   minimumRetreatDistance: 1
   retretVelocity: {x: 5, y: 3}
   stunnedDuration: 1
+  miniStunDuration: 0.3
   stunnedVelocity: {x: 7, y: 7}
   canBeStunned: 0
+  miniStunCooldown: 0.15
   idleTime: 2
   moveSpeed: 1.4
   moveAnimSpeedMultiplier: 1
@@ -250,7 +254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1233130696845866196}
   currentHealth: 0
-  maxHP: 200
+  maxHP: 20000
   isDead: 0
   knockbackPower: {x: 1.5, y: 2.5}
   heavyKnockBackPower: {x: 7, y: 7}

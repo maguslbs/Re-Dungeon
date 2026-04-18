@@ -24,6 +24,7 @@ public class Entity : MonoBehaviour
 
     public bool groundDetected { get; private set; }
     public bool wallDetected { get; private set; }
+    public bool isInvulnerable { get; private set; }
 
     private bool isKnocked;
     private Coroutine knockbackCo;
@@ -75,6 +76,11 @@ public class Entity : MonoBehaviour
 
         rb.linearVelocity = Vector2.zero;
         isKnocked = false;
+    }
+
+    public void SetInvulnerable(bool value)
+    {
+        isInvulnerable = value;
     }
 
     public void SetVelocity(float xVelocity, float yVelocity)

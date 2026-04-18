@@ -11,12 +11,11 @@ public class Enemy_StunnedState : EnemyState
 
     public override void Enter()
     {
+        stateTimer = enemy.stunnedDuration;
         base.Enter();
 
         vfx.EnableAttackAlert(false);
         enemy.EnableCounterWindow(false);
-
-        stateTimer = enemy.stunnedDuration;
         rb.linearVelocity = new Vector2(enemy.stunnedVelocity.x * -enemy.facingDir, enemy.stunnedVelocity.y);
     }
 
@@ -26,5 +25,10 @@ public class Enemy_StunnedState : EnemyState
 
         if (stateTimer < 0)
             stateMachine.ChangeState(enemy.idleState);
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
     }
 }

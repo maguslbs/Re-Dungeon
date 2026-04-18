@@ -29,6 +29,12 @@ public class Enemy_BattleState : EnemyState
 
     public override void Update()
     {
+        if (enemy.IsMiniStunned)
+        {
+            enemy.SetVelocity(0, rb.linearVelocity.y);
+            return;
+        }
+
         base.Update();
 
         if (enemy.PlayerDetected() == true)
@@ -47,7 +53,7 @@ public class Enemy_BattleState : EnemyState
         }
         else
         {
-            float xVelocity = enemy.canChasePlayer ? enemy.GetBattleMoveSpeed(): 0.001f;
+            float xVelocity = enemy.canChasePlayer ? enemy.GetBattleMoveSpeed() : 0.001f;
             enemy.SetVelocity(xVelocity * DirectionToPlayer(), rb.linearVelocity.y);
         }
     }

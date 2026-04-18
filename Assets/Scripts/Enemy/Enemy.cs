@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Enemy : Entity
 {
@@ -21,8 +22,13 @@ public class Enemy : Entity
 
     [Header("Stunned state details")]
     public float stunnedDuration = 1f;
+    public float miniStunDuration = 0.35f;
     public Vector2 stunnedVelocity = new Vector2(7, 7);
     [SerializeField] protected bool canBeStunned;
+    [SerializeField] private float miniStunCooldown = 0.15f;
+    private float lastTimeMiniStunned;
+    private Coroutine miniStunCoroutine;
+    public bool IsMiniStunned { get; private set; }
 
     [Header("Movement Details")]
     public float idleTime = 2;
@@ -44,7 +50,6 @@ public class Enemy : Entity
     public override void EntityDeath()
     {
         base.EntityDeath();
-
         stateMachine.ChangeState(deadState);
     }
 
@@ -83,6 +88,33 @@ public class Enemy : Entity
         return hit;
     }
 
+    public bool CanBeStunned() => canBeStunned;
+
+    public virtual bool OnHit(float damage, Vector2 knockback, float knockbackDuration)
+    {
+        if (Time.time < lastTimeMiniStunned + miniStunCooldown)
+            return false;
+
+        lastTimeMiniStunned = Time.time;
+
+        if (miniStunCoroutine != null)
+            StopCoroutine(miniStunCoroutine);
+
+        miniStunCoroutine = StartCoroutine(MiniStunCoroutine(knockback));
+        return true;
+    }
+
+    private IEnumerator MiniStunCoroutine(Vector2 knockback)
+    {
+        IsMiniStunned = true;
+        rb.linearVelocity = knockback;
+
+        yield return new WaitForSeconds(miniStunDuration);
+
+        IsMiniStunned = false;
+        miniStunCoroutine = null;
+    }
+
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
@@ -92,7 +124,6 @@ public class Enemy : Entity
 
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + (facingDir * attackDistance), playerCheck.position.y));
-
 
         Gizmos.color = Color.green;
         Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + (facingDir * minimumRetreatDistance), playerCheck.position.y));

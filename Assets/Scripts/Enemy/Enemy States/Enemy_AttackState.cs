@@ -8,6 +8,12 @@ public class Enemy_AttackState : EnemyState
 
     public override void Update()
     {
+        if (enemy.IsMiniStunned)
+        {
+            stateMachine.ChangeState(enemy.battleState);
+            return;
+        }
+
         base.Update();
 
         if (triggerCalled)

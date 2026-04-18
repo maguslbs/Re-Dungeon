@@ -19,6 +19,8 @@ public class Player_DashState : PlayerState
 
         base.Enter();
 
+        player.SetInvulnerable(true);
+
         player.stamina.UseStamina(player.dashCost);
 
         dashDir = player.moveInput.x != 0 ? ((int)player.moveInput.x) : player.facingDir;
@@ -50,6 +52,8 @@ public class Player_DashState : PlayerState
 
         player.SetVelocity(0, 0);
         rb.gravityScale = originalGravityScale;
+
+        player.SetInvulnerable(false);
     }
 
     private void CancelDashIfNeeded()
