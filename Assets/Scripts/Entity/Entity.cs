@@ -7,7 +7,7 @@ public class Entity : MonoBehaviour
     public event Action OnFlipped;
 
     public Animator anim { get; private set; }
-    public Rigidbody2D rb { get; private set; }
+    public Rigidbody rb { get; private set; } //3d
     public StateMachine stateMachine;
 
     private bool facingRight = true;
@@ -33,7 +33,7 @@ public class Entity : MonoBehaviour
     protected virtual void Awake()
     {
         anim = GetComponentInChildren<Animator>();
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody>(); //3d
 
         stateMachine = new StateMachine();
     }
@@ -70,11 +70,11 @@ public class Entity : MonoBehaviour
     private IEnumerator KnockBackCo(Vector2 knockback, float duration)
     {
         isKnocked = true;
-        rb.linearVelocity = knockback;
+        rb.linearVelocity = new Vector3(knockback.x, knockback.y, 0); //3d
 
         yield return new WaitForSeconds(duration);
 
-        rb.linearVelocity = Vector2.zero;
+        rb.linearVelocity = Vector3.zero; //3d
         isKnocked = false;
     }
 
@@ -88,7 +88,7 @@ public class Entity : MonoBehaviour
         if (isKnocked)
             return;
 
-        rb.linearVelocity = new Vector2(xVelocity, yVelocity);
+        rb.linearVelocity = new Vector3(xVelocity, yVelocity, 0); //3d
         HandleFlip(xVelocity);
     }
 
@@ -109,19 +109,19 @@ public class Entity : MonoBehaviour
         OnFlipped?.Invoke();
     }
 
-    private void HandleCollisionDetection()
+    private void HandleCollisionDetection() //3d
     {
 
 
-        groundDetected = Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
+        groundDetected = Physics.Raycast(groundCheck.position, Vector3.down, groundCheckDistance, whatIsGround);
 
         if (secondaryWallCheck != null)
         {
-            wallDetected = Physics2D.Raycast(primaryWallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround)
-                        && Physics2D.Raycast(secondaryWallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
+            wallDetected = Physics.Raycast(primaryWallCheck.position, Vector3.right * facingDir, wallCheckDistance, whatIsGround)
+                        && Physics.Raycast(secondaryWallCheck.position, Vector3.right * facingDir, wallCheckDistance, whatIsGround);
         }
         else
-            wallDetected = Physics2D.Raycast(primaryWallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
+            wallDetected = Physics.Raycast(primaryWallCheck.position, Vector3.right * facingDir, wallCheckDistance, whatIsGround);
 
     }
 

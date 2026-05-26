@@ -18,12 +18,12 @@ public class Enemy : Entity
     [Space]
     public float battleTimeDuration = 5;
     public float minimumRetreatDistance = 1;
-    public Vector2 retretVelocity;
+    public Vector3 retreatVelocity;
 
     [Header("Stunned state details")]
     public float stunnedDuration = 1f;
     public float miniStunDuration = 0.35f;
-    public Vector2 stunnedVelocity = new Vector2(7, 7);
+    public Vector3 stunnedVelocity = new Vector2(7, 7);
     [SerializeField] protected bool canBeStunned;
     [SerializeField] private float miniStunCooldown = 0.15f;
     private float lastTimeMiniStunned;
@@ -78,9 +78,9 @@ public class Enemy : Entity
         return player;
     }
 
-    public RaycastHit2D PlayerDetected()
+    public RaycastHit PlayerDetected()
     {
-        RaycastHit2D hit = Physics2D.Raycast(playerCheck.position, Vector2.right * facingDir, playerCheckDistance, whatIsPlayer | whatIsGround);
+        Physics.Raycast(playerCheck.position, Vector3.right * facingDir, out RaycastHit hit, playerCheckDistance, whatIsPlayer | whatIsGround);
 
         if (hit.collider == null || hit.collider.gameObject.layer != LayerMask.NameToLayer("Player"))
             return default;
@@ -90,7 +90,7 @@ public class Enemy : Entity
 
     public bool CanBeStunned() => canBeStunned;
 
-    public virtual bool OnHit(float damage, Vector2 knockback, float knockbackDuration)
+    public virtual bool OnHit(float damage, Vector3 knockback, float knockbackDuration)
     {
         if (Time.time < lastTimeMiniStunned + miniStunCooldown)
             return false;
@@ -104,7 +104,7 @@ public class Enemy : Entity
         return true;
     }
 
-    private IEnumerator MiniStunCoroutine(Vector2 knockback)
+    private IEnumerator MiniStunCoroutine(Vector3 knockback)
     {
         IsMiniStunned = true;
         rb.linearVelocity = knockback;

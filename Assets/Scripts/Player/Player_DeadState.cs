@@ -10,6 +10,6 @@ public class Player_DeadState : PlayerState
     {
         base.Enter();
         input.Disable();
-        rb.simulated = false;
+        rb.isKinematic = true; //3d
     }
 }

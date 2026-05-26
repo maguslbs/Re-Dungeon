@@ -24,8 +24,8 @@ public class Player : Entity
     public Entity_Stamina stamina { get; private set; }
 
     [Header("Attack Details")]
-    public Vector2[] attackVelocity;
-    public Vector2 jumpAttackVelocity;
+    public Vector3[] attackVelocity;
+    public Vector3 jumpAttackVelocity;
     public float attackVelocityDuration = .1f;
     public float comboResetTime = 1;
     private Coroutine queuedAttackCo;

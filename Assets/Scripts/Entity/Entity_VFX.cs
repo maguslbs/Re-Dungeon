@@ -1,9 +1,10 @@
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 
 public class Entity_VFX : MonoBehaviour
 {
-    private SpriteRenderer sr;
+    private SkinnedMeshRenderer smr; //3d
 
     [Header("On Taking Damage VFX")]
     [SerializeField] private Material onDamageMaterial;
@@ -18,8 +19,8 @@ public class Entity_VFX : MonoBehaviour
 
     private void Awake()
     {
-        sr = GetComponentInChildren<SpriteRenderer>();
-        originalMaterial = sr.material;
+        smr = GetComponentInChildren<SkinnedMeshRenderer>(); //3d
+        originalMaterial = smr.material;
     }
 
     public void CreateOnHitVFX(Transform target)
@@ -38,10 +39,12 @@ public class Entity_VFX : MonoBehaviour
 
     private IEnumerator OnDamageVFXCo()
     {
-        sr.material = onDamageMaterial;
+        if (smr == null) yield break;
+
+        smr.material = onDamageMaterial;
 
         yield return new WaitForSeconds(onDamageVfxDuration);
 
-        sr.material = originalMaterial;
+        smr.material = originalMaterial;
     }
 }

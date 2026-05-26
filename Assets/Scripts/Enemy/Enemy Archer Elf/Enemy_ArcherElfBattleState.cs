@@ -29,7 +29,7 @@ public class Enemy_ArcherElfBattleState : Enemy_BattleState
         if (enemy.groundDetected == false || enemy.wallDetected)
             reachedDeadEnd = true;
 
-        if (enemy.PlayerDetected() == true)
+        if (enemy.PlayerDetected().collider != null)
         {
             UpdateTargetIfNeeded();
             UpdateBattleTimer();
@@ -40,7 +40,7 @@ public class Enemy_ArcherElfBattleState : Enemy_BattleState
 
         if (CanAttack())
         {
-            if (enemy.PlayerDetected() == false && canFlip)
+            if (enemy.PlayerDetected().collider == null && canFlip)
             {
                 enemy.HandleFlip(DirectionToPlayer());
                 canFlip = false;
@@ -48,7 +48,7 @@ public class Enemy_ArcherElfBattleState : Enemy_BattleState
 
             enemy.SetVelocity(0, rb.linearVelocity.y);
 
-            if (WithinAttackRange() && enemy.PlayerDetected())
+            if (WithinAttackRange() && enemy.PlayerDetected().collider != null)
             {
                 canFlip = true;
                 lastTimeAttacked = Time.time;
@@ -67,7 +67,7 @@ public class Enemy_ArcherElfBattleState : Enemy_BattleState
             {
                 enemy.SetVelocity(0, rb.linearVelocity.y);
 
-                if (enemy.PlayerDetected() == false)
+                if (enemy.PlayerDetected().collider == null)
                     enemy.HandleFlip(DirectionToPlayer());
             }
         }

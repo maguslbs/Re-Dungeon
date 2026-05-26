@@ -22,7 +22,7 @@ public class Enemy_BattleState : EnemyState
 
         if (ShouldRetreat())
         {
-            rb.linearVelocity = new Vector2(enemy.retretVelocity.x * -DirectionToPlayer(), enemy.retretVelocity.y);
+            rb.linearVelocity = new Vector3(enemy.retreatVelocity.x * -DirectionToPlayer(), enemy.retreatVelocity.y, 0);
             enemy.HandleFlip(DirectionToPlayer());
         }
     }
@@ -37,7 +37,7 @@ public class Enemy_BattleState : EnemyState
 
         base.Update();
 
-        if (enemy.PlayerDetected() == true)
+        if (enemy.PlayerDetected().collider != null)
         {
             UpdateTargetIfNeeded();
             UpdateBattleTimer();
@@ -46,7 +46,7 @@ public class Enemy_BattleState : EnemyState
         if (BattleTimeIsOver())
             stateMachine.ChangeState(enemy.idleState);
 
-        if (WithinAttackRange() && enemy.PlayerDetected() && CanAttack())
+        if (WithinAttackRange() && enemy.PlayerDetected().collider != null && CanAttack())
         {
             lastTimeAttacked = Time.time;
             stateMachine.ChangeState(enemy.attackState);
@@ -64,10 +64,10 @@ public class Enemy_BattleState : EnemyState
 
     protected void UpdateTargetIfNeeded()
     {
-        if (enemy.PlayerDetected() == false)
+        if (enemy.PlayerDetected().collider == null)
             return;
 
-        Transform newTarget = enemy.PlayerDetected().transform;
+        Transform newTarget = enemy.PlayerDetected().collider.transform;
 
         if (newTarget != lastTarget)
         {
