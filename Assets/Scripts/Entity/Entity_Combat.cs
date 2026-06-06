@@ -40,9 +40,9 @@ public class Entity_Combat : MonoBehaviour
         vfx?.CreateOnHitVFX(((MonoBehaviour)target).transform);
     }
 
-    protected Collider2D[] GetDetectedColliders()
+    protected Collider[] GetDetectedColliders()
     {
-        return Physics2D.OverlapCircleAll(targetCheck.position, targetCheckRadius, whatIsTarget);
+        return Physics.OverlapSphere(targetCheck.position, targetCheckRadius, whatIsTarget);
     }
 
     private void OnDrawGizmos()

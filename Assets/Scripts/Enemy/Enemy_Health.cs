@@ -14,7 +14,7 @@ public class Enemy_Health : Entity_Health
         if (damageDealer.GetComponent<Player>() != null)
         {
             enemy.TryEnterBattleState(damageDealer);
-            Vector2 knockback = CalculateKnockback(damage, damageDealer);
+            Vector3 knockback = CalculateKnockback(damage, damageDealer);
             float duration = CalculateDuration(damage);
             enemy.OnHit(damage, knockback, duration);
         }

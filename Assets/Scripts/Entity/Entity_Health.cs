@@ -17,8 +17,8 @@ public class Entity_Health : MonoBehaviour, IDamageable
     public float GetMaxHealth() => maxHP;
 
     [Header("On Damage Knockback")]
-    [SerializeField] private Vector2 knockbackPower = new Vector2(1.5f, 2.5f);
-    [SerializeField] private Vector2 heavyKnockBackPower = new Vector2(7, 7);
+    [SerializeField] private Vector3 knockbackPower = new Vector3(1.5f, 2.5f,0);
+    [SerializeField] private Vector3 heavyKnockBackPower = new Vector3(7, 7,0);
     [SerializeField] private float knockbackDuration = .2f;
     [SerializeField] private float heavyKnockbackDuration = .5f;
 
@@ -100,10 +100,10 @@ public class Entity_Health : MonoBehaviour, IDamageable
         healthBar.value = currentHealth / maxHP;
     }
 
-    protected Vector2 CalculateKnockback(float damage, Transform damageDealer)
+    protected Vector3 CalculateKnockback(float damage, Transform damageDealer)
     {
         int direction = transform.position.x > damageDealer.position.x ? 1 : -1;
-        Vector2 knockback = isHeavyDamage(damage) ? heavyKnockBackPower : knockbackPower;
+        Vector3 knockback = isHeavyDamage(damage) ? heavyKnockBackPower : knockbackPower;
         knockback.x = knockback.x * direction;
         return knockback;
     }

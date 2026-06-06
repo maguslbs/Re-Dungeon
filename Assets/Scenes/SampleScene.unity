@@ -225,7 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 16151074}
   staminaText: {fileID: 1217926025}
-  playerStamina: {fileID: 1004782914}
+  playerStamina: {fileID: 2120427594}
 --- !u!1 &19163461
 GameObject:
   m_ObjectHideFlags: 0
@@ -4264,7 +4264,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &115772476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4401,6 +4401,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 140435513028058972, guid: 6e3fbe118b824bb478cae04d27f02113, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 534575554769704350, guid: 6e3fbe118b824bb478cae04d27f02113, type: 3}
       propertyPath: m_Name
       value: Enemy_Slime
@@ -4412,6 +4416,14 @@ PrefabInstance:
     - target: {fileID: 1076922195085273225, guid: 6e3fbe118b824bb478cae04d27f02113, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1431068175106441260, guid: 6e3fbe118b824bb478cae04d27f02113, type: 3}
+      propertyPath: attackDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6254355814870843982, guid: 6e3fbe118b824bb478cae04d27f02113, type: 3}
+      propertyPath: targetCheckRadius
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7177507853217392523, guid: 6e3fbe118b824bb478cae04d27f02113, type: 3}
       propertyPath: m_IsActive
@@ -4584,7 +4596,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &191338342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5447,8 +5459,8 @@ MonoBehaviour:
   currentHealth: 0
   maxHP: 180
   isDead: 0
-  knockbackPower: {x: 1.5, y: 2.5}
-  heavyKnockBackPower: {x: 7, y: 7}
+  knockbackPower: {x: 1.5, y: 2.5, z: 0}
+  heavyKnockBackPower: {x: 7, y: 7, z: 0}
   knockbackDuration: 0.2
   heavyKnockbackDuration: 0.5
   heavyDamageTreshold: 0.3
@@ -5941,7 +5953,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 83.657845, y: 1.4330933, z: 42.76062}
+  m_LocalPosition: {x: 120.477844, y: 1.4330933, z: 42.76062}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24655,6 +24667,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 803511569}
+    - target: {fileID: 173072233722528811, guid: ece40d4d28328f242ac4de1ecca7d8d9, type: 3}
+      propertyPath: currentHealth
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 763627513264617145, guid: ece40d4d28328f242ac4de1ecca7d8d9, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.89
@@ -24671,9 +24687,13 @@ PrefabInstance:
       propertyPath: damage
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 4464204833780744079, guid: ece40d4d28328f242ac4de1ecca7d8d9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5227516142395520756, guid: ece40d4d28328f242ac4de1ecca7d8d9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 84.5
+      value: 121.32
       objectReference: {fileID: 0}
     - target: {fileID: 5227516142395520756, guid: ece40d4d28328f242ac4de1ecca7d8d9, type: 3}
       propertyPath: m_LocalPosition.y
@@ -24711,6 +24731,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5632454827691771814, guid: ece40d4d28328f242ac4de1ecca7d8d9, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5632454827691771814, guid: ece40d4d28328f242ac4de1ecca7d8d9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6278296150797153975, guid: ece40d4d28328f242ac4de1ecca7d8d9, type: 3}
       propertyPath: jumpForce
       value: 6
@@ -24721,7 +24749,7 @@ PrefabInstance:
       objectReference: {fileID: 9000000, guid: 2faa610713d3b3c439473daa55e8c60a, type: 3}
     - target: {fileID: 8156140995984646033, guid: ece40d4d28328f242ac4de1ecca7d8d9, type: 3}
       propertyPath: m_Name
-      value: Player (1)
+      value: Player 3D
       objectReference: {fileID: 0}
     - target: {fileID: 8156140995984646033, guid: ece40d4d28328f242ac4de1ecca7d8d9, type: 3}
       propertyPath: m_IsActive
@@ -24960,7 +24988,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 803511569}
   hpText: {fileID: 532868849}
-  playerHealth: {fileID: 1004782911}
+  playerHealth: {fileID: 2120427595}
 --- !u!1 &826198476
 GameObject:
   m_ObjectHideFlags: 0
@@ -25600,7 +25628,7 @@ RectTransform:
   m_Father: {fileID: 161563644}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.876, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0.08001709, y: 0}
   m_SizeDelta: {x: -1.92, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -25717,28 +25745,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1001868723}
   m_CullTransparentMesh: 1
---- !u!114 &1004782911 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 173072233722528811, guid: ece40d4d28328f242ac4de1ecca7d8d9, type: 3}
-  m_PrefabInstance: {fileID: 1184844147166604692}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184844147166604693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ee66bdaf6a8809429e2f238c45a4ddd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1004782914 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1367121279541669288, guid: ece40d4d28328f242ac4de1ecca7d8d9, type: 3}
-  m_PrefabInstance: {fileID: 1184844147166604692}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1184844147166604693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef73e99fc8417fa4f8da6c77b8badef3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1006858715
 GameObject:
   m_ObjectHideFlags: 0
@@ -55169,7 +55175,7 @@ Transform:
   m_GameObject: {fileID: 1243355120}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 83.657845, y: 1.4330933, z: 42.76062}
+  m_LocalPosition: {x: 120.477844, y: 1.4330933, z: 42.76062}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55973,8 +55979,8 @@ MonoBehaviour:
   currentHealth: 0
   maxHP: 180
   isDead: 0
-  knockbackPower: {x: 1.5, y: 2.5}
-  heavyKnockBackPower: {x: 7, y: 7}
+  knockbackPower: {x: 1.5, y: 2.5, z: 0}
+  heavyKnockBackPower: {x: 7, y: 7, z: 0}
   knockbackDuration: 0.2
   heavyKnockbackDuration: 0.5
   heavyDamageTreshold: 0.3
@@ -56485,11 +56491,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: e607f74860c67814e93c914b710142d5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -21.980858
+      value: 3.211289
       objectReference: {fileID: 0}
     - target: {fileID: 400028, guid: e607f74860c67814e93c914b710142d5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -7.512626e-15
+      value: -9.057357e-15
       objectReference: {fileID: 0}
     - target: {fileID: 400028, guid: e607f74860c67814e93c914b710142d5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -56497,7 +56503,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400028, guid: e607f74860c67814e93c914b710142d5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -173.07222
+      value: -147.88008
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: e607f74860c67814e93c914b710142d5, type: 3}
       propertyPath: m_Controller
@@ -57557,8 +57563,8 @@ MonoBehaviour:
   currentHealth: 0
   maxHP: 180
   isDead: 0
-  knockbackPower: {x: 1.5, y: 2.5}
-  heavyKnockBackPower: {x: 7, y: 7}
+  knockbackPower: {x: 1.5, y: 2.5, z: 0}
+  heavyKnockBackPower: {x: 7, y: 7, z: 0}
   knockbackDuration: 0.2
   heavyKnockbackDuration: 0.5
   heavyDamageTreshold: 0.3
@@ -58465,7 +58471,7 @@ RectTransform:
   m_Father: {fileID: 1166537575}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.613, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0.08001709, y: 0}
   m_SizeDelta: {x: -1.92, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -58673,6 +58679,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5227516142395520756, guid: ece40d4d28328f242ac4de1ecca7d8d9, type: 3}
   m_PrefabInstance: {fileID: 779478376}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2120427594 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1367121279541669288, guid: ece40d4d28328f242ac4de1ecca7d8d9, type: 3}
+  m_PrefabInstance: {fileID: 779478376}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120427584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef73e99fc8417fa4f8da6c77b8badef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2120427595 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 173072233722528811, guid: ece40d4d28328f242ac4de1ecca7d8d9, type: 3}
+  m_PrefabInstance: {fileID: 779478376}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120427584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ee66bdaf6a8809429e2f238c45a4ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2132144261
 GameObject:
   m_ObjectHideFlags: 0
@@ -58980,8 +59008,8 @@ MonoBehaviour:
   currentHealth: 0
   maxHP: 180
   isDead: 0
-  knockbackPower: {x: 1.5, y: 2.5}
-  heavyKnockBackPower: {x: 7, y: 7}
+  knockbackPower: {x: 1.5, y: 2.5, z: 0}
+  heavyKnockBackPower: {x: 7, y: 7, z: 0}
   knockbackDuration: 0.2
   heavyKnockbackDuration: 0.5
   heavyDamageTreshold: 0.3
