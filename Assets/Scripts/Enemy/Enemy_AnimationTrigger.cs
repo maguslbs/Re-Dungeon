@@ -26,6 +26,8 @@ public class Enemy_AnimationTrigger : Entity_AnimationTriggers
 
     private void ShootArrow()
     {
+        Debug.Log("Animation trigger ShootArrow called!");
+
         if (enemy is Enemy_ArcherElf archer)
         {
             archer.ShootArrow();

@@ -43,6 +43,8 @@ public class Enemy_ArcherElf : Enemy
 
     public void ShootArrow()
     {
+        Debug.Log("ShootArrow called!");
+
         GameObject arrowGO = Instantiate(arrowPrefab, arrowSpawnPoint.position, Quaternion.identity);
 
         Enemy_ArcherElfArrow arrow = arrowGO.GetComponent<Enemy_ArcherElfArrow>();

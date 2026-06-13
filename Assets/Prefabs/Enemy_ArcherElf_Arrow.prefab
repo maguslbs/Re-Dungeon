@@ -52,6 +52,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   lifeTime: 5
+  arcHeight: 5
+  groundDestroyDelay: 1
 --- !u!65 &8040262856609777301
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -67,7 +69,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -95,11 +97,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1 &3490093689719780174
 GameObject:
   m_ObjectHideFlags: 0
